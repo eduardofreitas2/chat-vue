@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import './global.css'
+import db  from './db.json'
+import Messages from './components/Messages.vue'
 </script>
 
 <template>
@@ -9,7 +11,9 @@ import './global.css'
       <h2>Converse com a Uko</h2>
     </header>
 
-    <main></main>
+    <main v-for="message in db">
+      <Messages :text="message.text" :type="message.type" />
+    </main>
 
     <footer>
       <form action="index.html" method="post">
@@ -58,44 +62,6 @@ import './global.css'
     overflow-y: scroll;
 
     padding: 2rem 1rem 2rem 0;
-  }
-
-  .received {
-    word-break: break-all;
-    position: relative;
-
-    border: 2px solid;
-    border-radius: 0 8px 8px 8px;
-    padding: 0.875rem 1rem;
-
-    margin-right: 30%;
-  }
-
-  .received::before {
-    content: 'Uko diz:';
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-top: -24px;
-  }
-
-  .sent {
-    word-break: break-all;
-    position: relative;
-
-    border: 2px solid;
-    border-radius: 8px 0px 8px 8px;
-    padding: 0.875rem 1rem;
-    
-    margin-left: 30%;
-  }
-
-  .sent::before {
-    content: 'Você diz:';
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: -24px;
   }
 
   footer form {

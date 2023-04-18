@@ -1,0 +1,5 @@
+[
+  { "id": "1", "text": "Meow! 😸", "type": "received" },
+  { "id": "2", "text": "Meow! 😸 Meooowwww! 😸", "type": "received" },
+  { "id": "3", "text": "yo Uko", "type": "sent" }
+]
