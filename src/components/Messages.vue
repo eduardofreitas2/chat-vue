@@ -1,5 +1,4 @@
 <template>
-  <!-- Aqui vai ser renderizado a tag <p> com a mensagem -->
   <p :class="type">{{ text }}</p>
 </template>
 

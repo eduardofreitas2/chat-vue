@@ -1,7 +1,25 @@
 <script setup lang="ts">
 import './global.css'
-import db  from './db.json'
 import Messages from './components/Messages.vue'
+import { reactive } from 'vue';
+let text: string;
+
+const list = reactive([
+  { "id": "c", "text": "Meow! 😸", "type": "received" },
+  { "id": "a", "text": "Meow! 😸 Meooowwww! 😸", "type": "received" },
+  { "id": "b", "text": "yo Uko", "type": "sent" }
+]) 
+
+function sendMessage() {
+  if(text && text.trim() !== "") {
+    list.push(
+      { "id": String(new Date()), "text": text, "type": "sent" }
+    )
+    text = ""
+  }
+  const messageList = document.querySelector("main")
+  if(messageList) messageList.scrollTop = messageList.scrollHeight
+}
 </script>
 
 <template>
@@ -11,13 +29,13 @@ import Messages from './components/Messages.vue'
       <h2>Converse com a Uko</h2>
     </header>
 
-    <main v-for="message in db">
-      <Messages :text="message.text" :type="message.type" />
+    <main>
+      <Messages v-for="message in list" :text="message.text" :type="message.type" />
     </main>
 
     <footer>
-      <form action="index.html" method="post">
-        <textarea name="message" id="message" placeholder="Digite sua mensagem..."></textarea>
+      <form @keyup.enter="sendMessage" @submit.prevent="sendMessage" action="index.html" method="post">
+        <textarea v-model="text" name="message" id="message" placeholder="Digite sua mensagem..."></textarea>
         <button type="submit" id="send">
           <i class="ph-paper-plane-right-fill"></i>
         </button>
